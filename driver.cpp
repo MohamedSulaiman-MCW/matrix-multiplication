@@ -92,15 +92,11 @@ int main(){
             result[i] = new int[col];
         }
 
+        cout << "Running Unit test case "<<i+1<<"\n\n";
         //passing arguments to the multiplication function
         matrix_multiplication(A,B,result,row,col,col);
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                cout << result[i][j] << " ";
-            }
-            cout << endl;
-        }
+        printArray(result,row,col);
         cout << "\n";
         cout << "Result: ";
         compare(C,result,row,col);

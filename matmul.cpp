@@ -2,6 +2,7 @@
 #include<chrono>
 using namespace std;
 using namespace std::chrono;
+
 void printArray(int** matrix,int row,int col){
     for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -10,6 +11,8 @@ void printArray(int** matrix,int row,int col){
             cout << endl;
         }
 }
+
+//function to reset the result matrix 
 void resetMatrix(int** matrix, int row, int col) {
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++j) {
@@ -17,8 +20,9 @@ void resetMatrix(int** matrix, int row, int col) {
         }
     }
 }
+
 // ijk loop order
-void multiply_ijk(int** A, int** B, int** C, int m, int n, int p) {
+auto multiply_ijk(int** A, int** B, int** C, int m, int n, int p) {
     resetMatrix(C,m,p);
     auto start=high_resolution_clock::now();
     for (int i = 0; i < m; ++i) {
@@ -31,11 +35,11 @@ void multiply_ijk(int** A, int** B, int** C, int m, int n, int p) {
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
     cout << "Time taken by ijk loop is " << duration.count()<<" microseconds\n\n";
-    // printArray(C,m,p);
+    return duration.count();
 }
 
 // ikj loop order
-void multiply_ikj(int** A, int** B, int** C, int m, int n, int p) {
+auto multiply_ikj(int** A, int** B, int** C, int m, int n, int p) {
     resetMatrix(C,m,p);
     auto start=high_resolution_clock::now();
     for (int i = 0; i < m; ++i) {
@@ -48,11 +52,11 @@ void multiply_ikj(int** A, int** B, int** C, int m, int n, int p) {
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
     cout << "Time taken by ikj loop is " << duration.count()<<" microseconds\n\n";
-    // printArray(C,m,p);
+    return duration.count();
 }
 
 // jik loop order
-void multiply_jik(int** A, int** B, int** C, int m, int n, int p) {
+auto multiply_jik(int** A, int** B, int** C, int m, int n, int p) {
     resetMatrix(C,m,p);
     auto start=high_resolution_clock::now();
     for (int j = 0; j < p; ++j) {
@@ -65,11 +69,11 @@ void multiply_jik(int** A, int** B, int** C, int m, int n, int p) {
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
     cout << "Time taken by jik loop is " << duration.count()<<" microseconds\n\n";
-    // printArray(C,m,p);
+    return duration.count();
 }
 
 // jki loop order
-void multiply_jki(int** A, int** B, int** C, int m, int n, int p) {
+auto multiply_jki(int** A, int** B, int** C, int m, int n, int p) {
     resetMatrix(C,m,p);
     auto start=high_resolution_clock::now();
     for (int j = 0; j < p; ++j) {
@@ -82,11 +86,11 @@ void multiply_jki(int** A, int** B, int** C, int m, int n, int p) {
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
     cout << "Time taken by jki loop is " << duration.count()<<" microseconds\n\n";
-    // printArray(C,m,p);
+    return duration.count();
 }
 
 // kij loop order
-void multiply_kij(int** A, int** B, int** C, int m, int n, int p) {
+auto multiply_kij(int** A, int** B, int** C, int m, int n, int p) {
     resetMatrix(C,m,p);
     auto start=high_resolution_clock::now();
     for (int k = 0; k < n; ++k) {
@@ -99,11 +103,11 @@ void multiply_kij(int** A, int** B, int** C, int m, int n, int p) {
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
     cout << "Time taken by kij loop is " << duration.count()<<" microseconds\n\n";
-    // printArray(C,m,p);
+    return duration.count();
 }
 
 // kji loop order
-void multiply_kji(int** A, int** B, int** C, int m, int n, int p) {
+auto multiply_kji(int** A, int** B, int** C, int m, int n, int p) {
     resetMatrix(C,m,p);
     auto start=high_resolution_clock::now();
     for (int k = 0; k < n; ++k) {
@@ -116,23 +120,28 @@ void multiply_kji(int** A, int** B, int** C, int m, int n, int p) {
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
     cout << "Time taken by kji loop is " << duration.count()<<" microseconds\n\n";
-    // printArray(C,m,p);
+    return duration.count();
 }
-void matrix_multiplication(int **A , int **B , int **C ,int a_rows,int a_cols,int b_cols){
-    // cout << "inside the function";
-    // for(int i=0;i<a_rows;i++){
-    //     for(int j=0;j<b_cols;j++){
-    //         C[i][j]=0;
-    //         for(int k=0;k<a_cols;k++){
-    //             C[i][j]+=A[i][k]*B[k][j];
-    //         }
-    //     }
-    // }
-    multiply_ijk(A,B,C,a_rows,a_cols,b_cols);
-    multiply_ikj(A,B,C,a_rows,a_cols,b_cols);
-    multiply_jik(A,B,C,a_rows,a_cols,b_cols);
-    multiply_jki(A,B,C,a_rows,a_cols,b_cols);
-    multiply_kij(A,B,C,a_rows,a_cols,b_cols);
-    multiply_kji(A,B,C,a_rows,a_cols,b_cols);
+
+//function to compare two given matrices
+int compare(int** result,int ** C,int rows,int cols){
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            if(result[i][j]!=C[i][j]){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+void matrix_multiplication(int **A , int **B , int **C ,int a_rows,int a_cols,int b_cols,int* timeTaken){
+    timeTaken[0]=multiply_ijk(A,B,C,a_rows,a_cols,b_cols);
+    timeTaken[1]=multiply_ikj(A,B,C,a_rows,a_cols,b_cols);
+    timeTaken[2]=multiply_jik(A,B,C,a_rows,a_cols,b_cols);
+    timeTaken[3]=multiply_jki(A,B,C,a_rows,a_cols,b_cols);
+    timeTaken[4]=multiply_kij(A,B,C,a_rows,a_cols,b_cols);
+    timeTaken[5]=multiply_kji(A,B,C,a_rows,a_cols,b_cols);
     return;
 }
+

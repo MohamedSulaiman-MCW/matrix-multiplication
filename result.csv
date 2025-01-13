@@ -1,0 +1,11 @@
+Test Case,Status,ijk (ms),ikj (ms),jik (ms),jki (ms),kij (ms),kji (ms)
+Unit test case 1,Passed,Success,0,0,0,0,1024,0,
+Unit test case 2,Failed,Wrong answer ,3344,0,2782,0,0,2308,
+Unit test case 3,Passed,Success,19666,16357,14303,17240,17587,16724,
+Unit test case 4,Passed,Success,126698,153092,104620,148964,118272,132275,
+Unit test case 5,Passed,Success,251515,246968,261763,429471,296793,353375,
+Unit test case 6,Passed,Success,579049,565041,648550,664065,602055,674044,
+Unit test case 7,Failed,Dimension Mismatch,0,0,0,0,0,0,
+Unit test case 8,Failed,Invalid character found ,0,0,0,0,0,0,
+Unit test case 9,Failed,Invalid character found ,0,0,0,0,0,0,
+Unit test case 10,Failed,Invalid character found ,0,0,0,0,0,0,

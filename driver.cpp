@@ -16,8 +16,8 @@ void addToCsv(int testCase,string status,string err,int* timeTaken){
     writeCsv.close();
 }
 
-int main(){
-    int testNum=10;
+int main(){ 
+    int testNum=12;
     string testcases[testNum];
 
     //storing paths of each test cases in an array
@@ -46,9 +46,9 @@ int main(){
         string filenameA=testcases[i]+"/A.txt";
         ifstream readFileA(filenameA);
         readFileA >> row1 >> col1;
-        int **A = new int*[row1];
+        double **A = new double*[row1];
         for (int i = 0; i < row1; i++) {
-            A[i] = new int[col1];
+            A[i] = new double[col1];
         }
 
         //reading matrix input from test case
@@ -68,8 +68,7 @@ int main(){
             addToCsv(i+1,"Failed",err,timeTaken);
             continue;
         }
-    
-        
+        // printArray(A,row1,col1);
         int row2,col2;
         string filenameB=testcases[i]+"/B.txt";
         ifstream readFileB(filenameB);
@@ -83,9 +82,9 @@ int main(){
             continue;
         }
 
-        int **B = new int*[row2];
+        double **B = new double*[row2];
         for (int i = 0; i < row2; i++) {
-            B[i] = new int[col2];
+            B[i] = new double[col2];
         }
 
         
@@ -111,9 +110,9 @@ int main(){
         string filenameC=testcases[i]+"/C.txt";
         ifstream readFileC(filenameC);
         readFileC >> row3 >> col3;
-        int **C = new int*[row3];
+        double **C = new double*[row3];
         for (int i = 0; i < row3; i++) {
-            C[i] = new int[col3];
+            C[i] = new double[col3];
         }
         for(int i=0;i<row3;i++){
             for(int j=0;j<col3;j++){
@@ -122,9 +121,9 @@ int main(){
         }
 
         //declaring a 2d array to store the result
-        int **result = new int*[row1];
+        double **result = new double*[row1];
         for (int i = 0; i < row1; i++) {
-            result[i] = new int[col2];
+            result[i] = new double[col2];
         }
 
         //passing arguments to the multiplication function

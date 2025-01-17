@@ -7,7 +7,7 @@ using namespace std;
 void addToCsv(int testCase,string status,string err,int* timeTaken);
 void runTestCase(int* timeTaken,string directory,int testNum);
 
-//function to find the data type fo the input
+//function to find the data type of the input
 string detectDataType(const string& filePath) {
     ifstream file(filePath);
     string value;
@@ -159,7 +159,7 @@ void runTestCase(int* timeTaken,string directory,int testNum){
 }
 
 int main(){ 
-    int testNum=13;
+    int testNum=14;
     string testcases[testNum];
 
     //storing paths of each test cases in an array
